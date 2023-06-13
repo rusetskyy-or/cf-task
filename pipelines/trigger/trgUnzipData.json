@@ -1,0 +1,24 @@
+{
+    "name": "trgUnzipData",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Stopped",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "Unzip Data",
+                    "type": "PipelineReference"
+                }
+            }
+        ],
+        "type": "BlobEventsTrigger",
+        "typeProperties": {
+            "blobPathBeginsWith": "/files/blobs/Data.zip",
+            "ignoreEmptyBlobs": true,
+            "scope": "/subscriptions/&subscription&/resourceGroups/cf-assessment-fbqao9p/providers/Microsoft.Storage/storageAccounts/datalakesuffix",
+            "events": [
+                "Microsoft.Storage.BlobCreated"
+            ]
+        }
+    }
+}

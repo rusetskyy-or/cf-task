@@ -1,0 +1,64 @@
+{
+    "name": "Unzip Data",
+    "properties": {
+        "description": "Pipeline to unzip Data.zip file",
+        "activities": [
+            {
+                "name": "Unzip Data",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "BinarySource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": true
+                        },
+                        "formatSettings": {
+                            "type": "BinaryReadSettings",
+                            "compressionProperties": {
+                                "type": "ZipDeflateReadSettings",
+                                "preserveZipFileNameAsFolder": false
+                            }
+                        }
+                    },
+                    "sink": {
+                        "type": "BinarySink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        }
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "dsZipFile",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "fileName": "Data.zip"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "dsBinaryGeneric",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "containerName": "files",
+                            "folderName": "data"
+                        }
+                    }
+                ]
+            }
+        ],
+        "annotations": []
+    }
+}
